@@ -2,8 +2,10 @@
 #include <cstdlib>
 using namespace std;
 
-void selection_sort(int *arr, size_t size) {
-    int temp, min;
+template <class T>
+void selection_sort(T *arr, size_t size) {
+    T temp; 
+    int min;
     for (size_t start = 0; start < size - 1; start++) {
         min = start;
         for (size_t index = start + 1; index < size; index++) {
@@ -18,7 +20,7 @@ void selection_sort(int *arr, size_t size) {
 }
 
 int main() {
-    int arr1[] = {43, 27, 98, 65, 12};
+    char arr1[] = {'A', 'C', 'X', '6', 'Z'};
     size_t size = sizeof(arr1) / sizeof(arr1[0]);
 
     cout << "Before Sorting:" << endl;
