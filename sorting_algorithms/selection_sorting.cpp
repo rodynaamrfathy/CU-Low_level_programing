@@ -20,7 +20,7 @@ void selection_sort(T *arr, size_t size) {
 }
 
 int main() {
-    char arr1[] = {'A', 'C', 'X', '6', 'Z'};
+    char arr1[] = {'6', 'A', 'X', 'C', 'Z'};
     size_t size = sizeof(arr1) / sizeof(arr1[0]);
 
     cout << "Before Sorting:" << endl;
