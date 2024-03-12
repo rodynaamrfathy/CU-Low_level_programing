@@ -22,6 +22,10 @@ public:
         cout << "\t" << "Comparisons:  " << this->comparisons << endl;
         cout << "\t" << "Moves:  " << this->moves << endl;
     }
+    void set_to_zero(){
+        this->comparisons = 0;
+        this->moves = 0;
+    }
 };
 
 template <class T>
@@ -137,6 +141,9 @@ public:
         cout << endl;
         cout << "\t" << "Comparisons:  " << comparisons << endl;
     }
+    void set_to_zero(){
+        this->comparisons = 0;
+    }
 };
 
 int main() {
@@ -178,16 +185,20 @@ int main() {
             cout << "\n Selection sort:  " << endl;
             selection_sort.sort(arr1, size);
             selection_sort.print_array(arr1, size);
+            selection_sort.set_to_zero();
             cout << "\n";
 
             cout << "Shell sort:  " << endl;
             shell_sort.sort(arr2, size);
             shell_sort.print_array(arr2, size);
+            shell_sort.set_to_zero();
             cout << "\n";
 
             cout << "Merge sort:  " << endl;
             to_merge.merge_sort(arr3, 0, size - 1);
             to_merge.print_mergearray(arr3, size);
+            to_merge.set_to_zero();
+
             cout << "\n";
 
             delete[] arr1;
@@ -201,3 +212,4 @@ int main() {
 
     return 0;
 }
+
