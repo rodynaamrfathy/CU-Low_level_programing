@@ -1,4 +1,4 @@
-clude <iostream>
+#include <iostream>
 #include <cstdlib>
 using namespace std;
 
@@ -34,8 +34,8 @@ public:
     //void addTolistANDsort(int);
     void addToPosition(int, int);
     void removeAllElements(int);
-    int  deleteFromHead(); // delete the head and return its info;
-    int  deleteFromTail(); // delete the tail and return its info;
+    void  deleteFromHead(); // delete the head and return its info;
+    void  deleteFromTail(); // delete the tail and return its info;
     void deleteNode(int);
     bool isInList(int) const;
     //void moveToTail(int);
@@ -101,7 +101,8 @@ void IntDLList :: deleteFromHead(){
         head = tail = 0;
     }else{
         head = head->next;
-        head->prev = 0;
+        if (head != nullptr) // Check if the new head exists
+            head->prev = nullptr;
     }
     delete temp;
     size--;
@@ -145,7 +146,7 @@ void IntDLList :: removeAllElements(int info){
         deleteNode(info);
     }
 }
-bool IntDLList :: isInList(int info){
+bool IntDLList :: isInList(int info) const{
     IntDLLNode* p = head;
     while (p != nullptr) {
         if(p->info == info){
@@ -155,3 +156,79 @@ bool IntDLList :: isInList(int info){
     }
     return false;
 }
+
+/*
+the algorithm is to swap the head with tail
+now the prev node is supposed to be the next node
+and so on so i will swap the address of next and prev 
+of every node
+*/ 
+void IntDLList::reverseList() {
+    if (head == nullptr || head == tail) 
+        return;
+
+    IntDLLNode* current = head;
+    IntDLLNode* temp = nullptr;
+
+    temp = head;
+    head = tail;
+    tail = temp;
+
+    while (current != nullptr) {
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev;
+    }
+}
+
+
+
+
+int main() {
+    IntDLList myList;
+
+    // Testing addToHead and addToTail
+    myList.addToHead(1);
+    myList.addToHead(2);
+    myList.addToTail(3);
+    myList.addToTail(4);
+    myList.addToHead(2);
+    myList.addToTail(3);
+    myList.addToTail(2);
+    cout << "Original list:" << endl;
+    myList.printList();
+
+    // Testing deleteFromHead and deleteFromTail
+    myList.deleteFromHead();
+    myList.deleteFromTail();
+    cout << "List after deleting from head and tail:" << endl;
+    myList.printList();
+
+    // Testing addToPosition
+    myList.addToPosition(5, 1);
+    cout << "List after adding 5 at position 1:" << endl;
+    myList.printList();
+
+    // Testing deleteNode
+    myList.deleteNode(5);
+    cout << "List after deleting node with value 5:" << endl;
+    myList.printList();
+
+    // Testing removeAllElements
+    myList.removeAllElements(2);
+    cout << "List after removing all elements with value 2:" << endl;
+    myList.printList();
+
+    // Testing reverseList
+    cout << "Reversed list:" << endl;
+    myList.reverseList();
+    myList.printList();
+
+    // Testing isInList
+    cout << "Is 3 in the list? " << (myList.isInList(3) ? "Yes" : "No") << endl;
+    cout << "Is 6 in the list? " << (myList.isInList(6) ? "Yes" : "No") << endl;
+
+    return 0;
+}
+
